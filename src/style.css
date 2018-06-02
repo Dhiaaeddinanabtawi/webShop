@@ -193,7 +193,7 @@ form#order>h2{
 
 #confirm{
   position:absolute;  
-  display:none;
+  /* display:none; */
   top:0;
   left:0;
   bottom:0;

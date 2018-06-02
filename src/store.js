@@ -10,25 +10,29 @@ export default new Vuex.Store({
 		contractsPrice: 0,
 		dataAmountPrice: 0,
 		extrasPrice: 0,
-		totalPrice: 50
-	}, 
+		totalPrice: 50,
+		showConfirmationMsg: false
+	},
 	mutations: {
-		setMobilePrice: function(state, value){
+		setMobilePrice: function (state, value) {
 			state.mobilePrice = value
 			state.totalPrice = getTotal([state.extrasPrice, state.mobilePrice, state.contractsPrice, state.dataAmountPrice])
 		},
-		setContractsPrice: function(state, value){
+		setContractsPrice: function (state, value) {
 			state.contractsPrice = parseInt(value)
 			state.totalPrice = getTotal([state.extrasPrice, state.mobilePrice, state.contractsPrice, state.dataAmountPrice])
 		},
-		setDataAmountPrice(state, value){
+		setDataAmountPrice(state, value) {
 			state.dataAmountPrice = value
 			state.totalPrice = getTotal([state.extrasPrice, state.mobilePrice, state.contractsPrice, state.dataAmountPrice])
 		},
-		setExtrasPrice(state, value){
+		setExtrasPrice(state, value) {
 			state.extrasPrice = value
 			state.totalPrice = getTotal([state.extrasPrice, state.mobilePrice, state.contractsPrice, state.dataAmountPrice])
 		},
+		setConfirmationMsg(state, bool) {
+			state.showConfirmationMsg = bool;
+		}
 	},
 	actions: {
 		setMobilePrice: (context) => context.commit('setMobilePrice'),
