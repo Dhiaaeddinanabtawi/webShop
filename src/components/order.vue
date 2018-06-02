@@ -8,11 +8,12 @@
         <input type="text" id="street"  placeholder="Gatuadress">  
         <input type="text" id="zip"  placeholder="Postnr">  
         <input type="text" id="city"  placeholder="Ort">  
-        <input type="submit" value="Skicka" v-on:click="showMessage">
+        <input type="submit" value="Skicka" @click.prevent="showMessage">
       </form>
 </template>
 
 <script>
+    import { mapMutations } from 'vuex'
 	export default {
 		'name': 'order', 
         data() {
@@ -21,12 +22,13 @@
             }
         },
         methods: {
+            ...mapMutations(['setConfirmationMsg']),
             showForm: function(event){
                 event.preventDefault();
                 this.formVisible = ! this.formVisible;
             },
             showMessage: function(){
-                console.log('Din beställning är mottagen')
+                this.setConfirmationMsg(true)
             }
         }
     }
