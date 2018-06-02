@@ -44,21 +44,32 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
 	export default {
-	 'name': 'monthlyPrice',
-        methods: {
-            showPrice: function(price) {
-                $('#price').val(price);
-                price = '' + price;
-                price = price.split('').reverse();
-                let p_100 = price[2]?price[2]:0;
-                let p_10 = price[1]?price[1]:0;
-                let p_1 = price[0];
-                let f = 30;
-                $('.n-100').animate({'margin-top': p_100 * -f});
-                $('.n-10').animate({'margin-top': p_10 * -f});
-                $('.n-1').animate({'margin-top': p_1 * -f}); 
-            }
-        }
-}
+	  'name': 'monthlyPrice',
+    computed: {
+      ...mapState({
+        totalPrice: state => state.totalPrice
+      })
+    },
+    watch: {
+      totalPrice(newVal) {
+        this.showPrice(newVal)
+      }
+    },
+    methods: {
+      showPrice: function(price) {
+        $('#price').val(price);
+        price = '' + price;
+        price = price.split('').reverse();
+        let p_100 = price[2]?price[2]:0;
+        let p_10 = price[1]?price[1]:0;
+        let p_1 = price[0];
+        let f = 30;
+        $('.n-100').animate({'margin-top': p_100 * -f});
+        $('.n-10').animate({'margin-top': p_10 * -f});
+        $('.n-1').animate({'margin-top': p_1 * -f}); 
+      }
+    }
+  }
 </script>

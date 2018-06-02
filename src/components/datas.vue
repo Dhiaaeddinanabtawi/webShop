@@ -1,7 +1,7 @@
 <template>
 	<div class="datas">
 		<div class="data" v-for="size in sizes">
-			<input type="radio" name="data" :value="size.value" @change = "setDataAmountPrice(size.value)">
+			<input type="radio" name="data" :value="size.value" @change="setDataAmountPrice(size.value)">
 			<label>{{size.amount}}</label>
 		</div>
 	</div>

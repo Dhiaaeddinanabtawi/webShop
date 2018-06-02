@@ -4,7 +4,6 @@
 				<label>{{type.label}}</label>
 				<input type="checkbox" :value="type.value" v-model="selectedNumbers">
 			</div>
-			<div>{{sum}}</div>
 		</div>
 </template>
 
@@ -13,7 +12,12 @@
 		'name': 'extras',
 		methods: {
 			setExtrasPrice: function(value){
-				this.$store.commit('setExtrasPrice', sum())
+				this.$store.commit('setExtrasPrice', this.sum)
+			}
+		},
+		watch: {
+			selectedNumbers(newVal, oldVal) {
+				this.setExtrasPrice()
 			}
 		},
 		data() {
@@ -33,6 +37,9 @@
 					return parseInt(a) + parseInt(b);
 				}, 0);
 			}
+		},
+		created() {
+			console.log('this instance', this, this.sum)
 		}
 	}
 </script>

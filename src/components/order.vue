@@ -1,7 +1,6 @@
 <template>
-	<form id="order">
-        <button id="open-order">Beställ</button>
-        <input type="hidden" name="price" id="price" value="0">
+	<form id="order" v-bind:class="{showForm:formVisible}">
+        <button id="open-order" v-on:click="showForm">Beställ</button>
         <input type="text" id="first-name" placeholder="Förnamn">
         <input type="text" id="last-name" placeholder="Efternamn">
         <input type="tel" id="phone" placeholder="Telefonnr">
@@ -9,12 +8,26 @@
         <input type="text" id="street"  placeholder="Gatuadress">  
         <input type="text" id="zip"  placeholder="Postnr">  
         <input type="text" id="city"  placeholder="Ort">  
-        <input type="submit" value="Skicka">
+        <input type="submit" value="Skicka" v-on:click="showMessage">
       </form>
 </template>
 
 <script>
 	export default {
-		'name': 'order'
-	}
+		'name': 'order', 
+        data() {
+            return {
+                formVisible: false
+            }
+        },
+        methods: {
+            showForm: function(event){
+                event.preventDefault();
+                this.formVisible = ! this.formVisible;
+            },
+            showMessage: function(){
+                console.log('Din beställning är mottagen')
+            }
+        }
+    }
 </script>

@@ -3,27 +3,32 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
+const getTotal = prices => prices.reduce((sum, num) => sum += num, 0)
 export default new Vuex.Store({
 	state: {
 		mobilePrice: 0,
 		contractsPrice: 0,
 		dataAmountPrice: 0,
 		extrasPrice: 0,
-		totalPrice: 0
+		totalPrice: 50
 	}, 
 	mutations: {
 		setMobilePrice: function(state, value){
 			state.mobilePrice = value
+			state.totalPrice = getTotal([state.extrasPrice, state.mobilePrice, state.contractsPrice, state.dataAmountPrice])
 		},
 		setContractsPrice: function(state, value){
 			state.contractsPrice = parseInt(value)
+			state.totalPrice = getTotal([state.extrasPrice, state.mobilePrice, state.contractsPrice, state.dataAmountPrice])
 		},
 		setDataAmountPrice(state, value){
 			state.dataAmountPrice = value
+			state.totalPrice = getTotal([state.extrasPrice, state.mobilePrice, state.contractsPrice, state.dataAmountPrice])
 		},
 		setExtrasPrice(state, value){
 			state.extrasPrice = value
-		}
+			state.totalPrice = getTotal([state.extrasPrice, state.mobilePrice, state.contractsPrice, state.dataAmountPrice])
+		},
 	},
 	actions: {
 		setMobilePrice: (context) => context.commit('setMobilePrice'),
